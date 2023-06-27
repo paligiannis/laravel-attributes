@@ -33,7 +33,7 @@ class AttributesServiceProvider extends ServiceProvider
     public function register()
     {
         // Merge config
-        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'rinvex.attributes');
+        $this->mergeConfigFrom(realpath(__DIR__ . '/../../config/config.php'), 'rinvex.attributes');
 
         // Bind eloquent models to IoC container
         $this->registerModels([
@@ -47,7 +47,7 @@ class AttributesServiceProvider extends ServiceProvider
         });
 
         // Register console commands
-        $this->registerCommands($this->commands);
+        // $this->registerCommands($this->commands);
     }
 
     /**
@@ -58,6 +58,6 @@ class AttributesServiceProvider extends ServiceProvider
         // Publish Resources
         $this->publishesConfig('rinvex/laravel-attributes');
         $this->publishesMigrations('rinvex/laravel-attributes');
-        ! $this->autoloadMigrations('rinvex/laravel-attributes') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        !$this->autoloadMigrations('rinvex/laravel-attributes') || $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 }

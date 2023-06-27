@@ -57,8 +57,8 @@ trait Attributable
     public static function bootAttributable()
     {
         static::addGlobalScope(new EagerLoadScope());
-        static::saved(EntityWasSaved::class.'@handle');
-        static::deleted(EntityWasDeleted::class.'@handle');
+        static::saved(EntityWasSaved::class . '@handle');
+        static::deleted(EntityWasDeleted::class . '@handle');
     }
 
     /**
@@ -70,7 +70,7 @@ trait Attributable
     {
         parent::bootIfNotBooted();
 
-        if (! $this->entityAttributeRelationsBooted) {
+        if (!$this->entityAttributeRelationsBooted) {
             $attributes = $this->getEntityAttributes();
 
             // We will manually add a relationship for every attribute registered
@@ -160,7 +160,7 @@ trait Attributable
         // In case any relation value is found, we will just provide it as is.
         // Otherwise, we will check if exists any attribute relation for the
         // given key. If so, we will load the relation calling its method.
-        if (is_null($value) && ! $this->relationLoaded($key) && $this->isEntityAttributeRelation($key)) {
+        if (is_null($value) && !$this->relationLoaded($key) && $this->isEntityAttributeRelation($key)) {
             $value = $this->getRelationshipFromMethod($key);
         }
 
@@ -191,7 +191,7 @@ trait Attributable
         $morphClass = $this->getMorphClass();
         static::$entityAttributes = static::$entityAttributes ?? collect();
 
-        if (! static::$entityAttributes->has($morphClass) && Schema::hasTable(config('rinvex.attributes.tables.attribute_entity'))) {
+        if (!static::$entityAttributes->has($morphClass) && Schema::hasTable(config('rinvex.attributes.tables.attribute_entity'))) {
             $locale = app()->getLocale();
 
             /* This is a trial to implement per resource attributes,
@@ -229,7 +229,7 @@ trait Attributable
             }
         }
 
-        if (count($this->getFillable()) > 0 && ! static::$unguarded) {
+        if (count($this->getFillable()) > 0 && !static::$unguarded) {
             return array_intersect_key($attributes, array_flip($this->getFillable()));
         }
 
@@ -356,7 +356,7 @@ trait Attributable
             return $value->pluck('content');
         }
 
-        return ! is_null($value) ? $value->getAttribute('content') : null;
+        return !is_null($value) ? $value->getAttribute('content') : null;
     }
 
     /**
@@ -429,7 +429,7 @@ trait Attributable
      */
     protected function setEntityAttributeValue(Attribute $attribute, $value)
     {
-        if (! is_null($value) && ! $value instanceof Value) {
+        if (!is_null($value) && !$value instanceof Value) {
             $model = Attribute::getTypeModel($attribute->getAttribute('type'));
             $instance = new $model();
 
@@ -520,7 +520,7 @@ trait Attributable
      *
      * @return array
      */
-    public function __sleep()
+    public function __sleep1()
     {
         if ($this->entityAttributeRelations && current($this->entityAttributeRelations) instanceof Closure) {
             $relations = $this->entityAttributeRelations;
